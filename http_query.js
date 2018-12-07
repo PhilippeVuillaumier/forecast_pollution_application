@@ -52,9 +52,9 @@ req.onreadystatechange = function (event) {
             document.getElementById("pm25").innerHTML = "Particules pm2.5 : " + getPm25(obj);
             document.getElementById("so2").innerHTML = "Dioxyde de soufre : " + getSo2(obj);
 
-            Console.log("Réponse reçue: %s", obj);
+            window.console.log("Réponse reçue: %s", obj);
         } else {
-            Console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+            window.console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
         }
     }
 };

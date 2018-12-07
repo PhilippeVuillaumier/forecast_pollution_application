@@ -1,39 +1,39 @@
 const req = new XMLHttpRequest();
-var n02 = "n.c";
-var o3 = "n.c";
-var pm10 = "n.c";
-var pm25 = "n.c";
-var so2 = "n.c";
 
-function ifExistNo2(obj) {
+function getNo2(obj) {
     if (obj.data.iaqi.no2) {
-        no2 = obj.data.iaqi.no2.v;
+        return obj.data.iaqi.no2.v;
     }
+    return "n.c";
 }
 
-function ifExistO3(obj) {
+function getO3(obj) {
     if (obj.data.iaqi.o3) {
-        o3 = obj.data.iaqi.o3.v;
+        return obj.data.iaqi.o3.v;
     }
+    return "n.c";
 }
 
-function ifExistPm10(obj) {
+function getPm10(obj) {
     if (obj.data.iaqi.pm10) {
-        pm10 = obj.data.iaqi.pm10.v;
+        return obj.data.iaqi.pm10.v;
     }
+    return "n.c";
 }
 
-function ifExistPm25(obj) {
+function getPm25(obj) {
     if (obj.data.iaqi.pm25) {
-        pm25 = obj.data.iaqi.pm25.v;
+        return obj.data.iaqi.pm25.v;
     }
-}
-function ifExistSo2(obj) {
-    if (obj.data.iaqi.so2) {
-        so2 = obj.data.iaqi.so2.v;
-    }
+    return "n.c";
 }
 
+function getSo2(obj) {
+    if (obj.data.iaqi.so2) {
+        return obj.data.iaqi.so2.v;
+    }
+    return "n.c";
+}
 
 req.onreadystatechange = function (event) {
     // XMLHttpRequest.DONE === 4
@@ -41,25 +41,16 @@ req.onreadystatechange = function (event) {
         if (this.status === 200) {
 
             obj = JSON.parse(this.responseText);
-
             city = obj.data.city.name;
             aqi = obj.data.aqi;
 
-
-            ifExistNo2(obj);
-            ifExistO3(obj);
-            ifExistPm10(obj);
-            ifExistPm25(obj);
-            ifExistSo2(obj);
-
-
             document.getElementById("city").innerHTML = "Votre pollution à " + city;
             document.getElementById("aqi").innerHTML = "Air quality index : " + aqi;
-            document.getElementById("no2").innerHTML = "Dioxyde d'azote : " + no2;
-            document.getElementById("o3").innerHTML = "Ozone : " + o3;
-            document.getElementById("pm10").innerHTML = "Particules pm10 : " + pm10;
-            document.getElementById("pm25").innerHTML = "Particules pm2.5 : " + pm25;
-            document.getElementById("so2").innerHTML = "Dioxyde de soufre : " + so2;
+            document.getElementById("no2").innerHTML = "Dioxyde d'azote : " + getNo2(obj);
+            document.getElementById("o3").innerHTML = "Ozone : " + getO3(obj);
+            document.getElementById("pm10").innerHTML = "Particules pm10 : " + getPm10(obj);
+            document.getElementById("pm25").innerHTML = "Particules pm2.5 : " + getPm25(obj);
+            document.getElementById("so2").innerHTML = "Dioxyde de soufre : " + getSo2(obj);
 
             console.log("Réponse reçue: %s", obj);
         } else {

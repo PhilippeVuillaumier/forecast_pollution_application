@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> AppPollution</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+
+<body>
+    <p id="city"></p>
+    <p id="aqi"></p>
+    <p id="no2"></p>
+    <p id="o3"></p>
+    <p id="pm10"></p>
+    <p id="pm25"></p>
+    <p id="sO2"></p>
+    <script>
+        const req = new XMLHttpRequest();
+
+        req.onreadystatechange = function (event) {
+            // XMLHttpRequest.DONE === 4
+            if (this.readyState === XMLHttpRequest.DONE) {
+                if (this.status === 200) {
+
+                    obj = JSON.parse(this.responseText);
+                    
+                    city = obj.data.city.name;
+
+                 
+                    aqi = obj.data.aqi;
+                    no2 = obj.data.iaqi.no2.v;
+                    // o3 = obj.data.iaqi.o3.v;
+                    pm10 = obj.data.iaqi.pm10.v;
+                    // pm25 = obj.data.iaqi.pm25.v;
+                    // sO2 = obj.data.iaqi.sO2.v;
+
+                    document.getElementById("city").innerHTML = "Votre pollution à " + city;
+                    document.getElementById("aqi").innerHTML = "Air quality index : " + aqi;
+                    document.getElementById("no2").innerHTML = "Dioxyde d'azote : " + no2;
+                    document.getElementById("pm10").innerHTML = "Particules pm10 : " + pm10;
+
+                    console.log("Réponse reçue: %s", obj);
+                } else {
+                    console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+                }
+            }
+        };
+        // alert(req.open('GET', 'http://api.waqi.info/feed/shanghai/?token=demo', true));
+        req.open('GET', 'https://api.waqi.info/feed/geo:45.75;4.85/?token=1a842a4d1c059b7015ebdf80ecb9446c64e711ff', true);
+        req.send(null);
+    </script>
+
+</body>
+
+</html>

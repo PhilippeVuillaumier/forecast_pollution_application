@@ -52,12 +52,12 @@ req.onreadystatechange = function (event) {
             document.getElementById("pm25").innerHTML = "Particules pm2.5 : " + getPm25(obj);
             document.getElementById("so2").innerHTML = "Dioxyde de soufre : " + getSo2(obj);
 
-            console.log("Réponse reçue: %s", obj);
+            Console.log("Réponse reçue: %s", obj);
         } else {
-            console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
+            Console.log("Status de la réponse: %d (%s)", this.status, this.statusText);
         }
     }
 };
-// alert(req.open('GET', 'http://api.waqi.info/feed/shanghai/?token=demo', true));
-req.open('GET', 'https://api.waqi.info/feed/geo:45.75;4.85/?token=1a842a4d1c059b7015ebdf80ecb9446c64e711ff', true);
+// alert(req.open("GET", "http://api.waqi.info/feed/shanghai/?token=demo", true));
+req.open("GET", "https://api.waqi.info/feed/geo:45.75;4.85/?token=1a842a4d1c059b7015ebdf80ecb9446c64e711ff", true);
 req.send(null);

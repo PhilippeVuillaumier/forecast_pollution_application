@@ -17,7 +17,7 @@
     <p id="o3"></p>
     <p id="pm10"></p>
     <p id="pm25"></p>
-    <p id="sO2"></p>
+    <p id="so2"></p>
     <script>
         const req = new XMLHttpRequest();
 
@@ -29,19 +29,23 @@
                     obj = JSON.parse(this.responseText);
                     
                     city = obj.data.city.name;
-
-                 
                     aqi = obj.data.aqi;
-                    no2 = obj.data.iaqi.no2.v;
-                    // o3 = obj.data.iaqi.o3.v;
-                    pm10 = obj.data.iaqi.pm10.v;
-                    // pm25 = obj.data.iaqi.pm25.v;
-                    // sO2 = obj.data.iaqi.sO2.v;
+                 
+                 
+                 if(!obj.data.iaqi.no2){no2 = "N / C"}else{ no2 = obj.data.iaqi.no2.v;}
+                 if(!obj.data.iaqi.o3){o3 = "N / C"}else{ o3 = obj.data.iaqi.o3.v;}
+                 if(!obj.data.iaqi.pm10){pm10 = "N / C"}else{ pm10 = obj.data.iaqi.pm10.v;}
+                 if(!obj.data.iaqi.pm25){pm25 = "N / C"}else{ pm25 = obj.data.iaqi.pm25.v;}
+                 if(!obj.data.iaqi.so2){so2 = "N / C"}else{ so2 = obj.data.iaqi.so2.v;}
+                   
 
                     document.getElementById("city").innerHTML = "Votre pollution à " + city;
                     document.getElementById("aqi").innerHTML = "Air quality index : " + aqi;
                     document.getElementById("no2").innerHTML = "Dioxyde d'azote : " + no2;
+                    document.getElementById("o3").innerHTML = "Ozone : " + o3;
                     document.getElementById("pm10").innerHTML = "Particules pm10 : " + pm10;
+                    document.getElementById("pm25").innerHTML = "Particules pm2.5 : " + pm25;
+                    document.getElementById("so2").innerHTML = "Dioxyde de soufre : " + so2;
 
                     console.log("Réponse reçue: %s", obj);
                 } else {

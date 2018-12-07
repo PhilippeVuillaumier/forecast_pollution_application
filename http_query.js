@@ -1,17 +1,39 @@
 const req = new XMLHttpRequest();
-var n02;
-var o3;
-var pm10;
-var pm25;
-var so2;
+var n02 = "n.c";
+var o3 = "n.c";
+var pm10 = "n.c";
+var pm25 = "n.c";
+var so2 = "n.c";
 
-function ifExist(obj){
-    if(!obj.data.iaqi.no2){no2 = "N / C"}else{ no2 = obj.data.iaqi.no2.v;}
-    if(!obj.data.iaqi.o3){o3 = "N / C"}else{ o3 = obj.data.iaqi.o3.v;}
-    if(!obj.data.iaqi.pm10){pm10 = "N / C"}else{ pm10 = obj.data.iaqi.pm10.v;}
-    if(!obj.data.iaqi.pm25){pm25 = "N / C"}else{ pm25 = obj.data.iaqi.pm25.v;}
-    if(!obj.data.iaqi.so2){so2 = "N / C"}else{ so2 = obj.data.iaqi.so2.v;}
+function ifExistNo2(obj) {
+    if (obj.data.iaqi.no2) {
+        no2 = obj.data.iaqi.no2.v;
+    }
 }
+
+function ifExistO3(obj) {
+    if (obj.data.iaqi.o3) {
+        o3 = obj.data.iaqi.o3.v;
+    }
+}
+
+function ifExistPm10(obj) {
+    if (obj.data.iaqi.pm10) {
+        pm10 = obj.data.iaqi.pm10.v;
+    }
+}
+
+function ifExistPm25(obj) {
+    if (obj.data.iaqi.pm25) {
+        pm25 = obj.data.iaqi.pm25.v;
+    }
+}
+function ifExistSo2(obj) {
+    if (obj.data.iaqi.so2) {
+        so2 = obj.data.iaqi.so2.v;
+    }
+}
+
 
 req.onreadystatechange = function (event) {
     // XMLHttpRequest.DONE === 4
@@ -19,13 +41,17 @@ req.onreadystatechange = function (event) {
         if (this.status === 200) {
 
             obj = JSON.parse(this.responseText);
-            
+
             city = obj.data.city.name;
             aqi = obj.data.aqi;
-         
-         
-            ifExist(obj);
-           
+
+
+            ifExistNo2(obj);
+            ifExistO3(obj);
+            ifExistPm10(obj);
+            ifExistPm25(obj);
+            ifExistSo2(obj);
+
 
             document.getElementById("city").innerHTML = "Votre pollution à " + city;
             document.getElementById("aqi").innerHTML = "Air quality index : " + aqi;
